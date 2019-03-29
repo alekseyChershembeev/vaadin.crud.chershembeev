@@ -34,7 +34,7 @@ class UserConfirmationEmployee extends Window {
 
         employeeDao = new EmployeeDaoImpl();
 
-        setStyleUserConfirmation();
+        setStyle();
 
         setComponents();
 
@@ -73,7 +73,7 @@ class UserConfirmationEmployee extends Window {
     }
 
 
-    private void setStyleUserConfirmation() {
+    private void setStyle() {
         setStyleName("Удалить сотрудника/сотрудников ?");
         center();
         setClosable(true);

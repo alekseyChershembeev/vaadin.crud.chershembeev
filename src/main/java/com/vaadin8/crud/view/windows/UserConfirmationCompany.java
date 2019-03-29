@@ -30,7 +30,7 @@ class UserConfirmationCompany extends Window {
 
         companyDao = new CompanyDaoImpl();
 
-        setStyleUserConfirmation();
+        setStyle();
 
         setComponents();
 
@@ -69,7 +69,7 @@ class UserConfirmationCompany extends Window {
     }
 
 
-    private void setStyleUserConfirmation() {
+    private void setStyle() {
         setStyleName("Удалить компанию");
         center();
         setClosable(true);
@@ -98,8 +98,5 @@ class UserConfirmationCompany extends Window {
         }
 
     }
-
-   
-
 
 }

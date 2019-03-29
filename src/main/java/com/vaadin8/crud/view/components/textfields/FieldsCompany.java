@@ -1,10 +1,9 @@
 package com.vaadin8.crud.view.components.textfields;
 
 
-import com.AisaTest06.check.fields.CheckNIP;
-import com.AisaTest06.check.fields.CheckPhone;
 import com.vaadin.server.UserError;
 import com.vaadin.ui.TextField;
+import com.vaadin8.crud.check.fields.CheckCompanyEntity;
 
 import java.util.logging.Logger;
 
@@ -26,12 +25,12 @@ public class FieldsCompany extends TextField {
     {
         TextField addressTextField = new TextField("Адрес");
         addressTextField.addValueChangeListener(valueChangeEvent -> {
-            if (!(valueChangeEvent.getValue().length()>0)){
-                addressTextField.setComponentError(
-                        new UserError("Необходимо заполнить поле "+ addressTextField.getCaption()));
+            if (CheckCompanyEntity.isValidAddress(valueChangeEvent.getValue())){
+                addressTextField.setComponentError(null);
             }
             else {
-                addressTextField.setComponentError(null);
+                addressTextField.setComponentError(
+                        new UserError("Необходимо заполнить поле "+ addressTextField.getCaption()));
             }
         });
         addressTextField.setSizeFull();
@@ -45,11 +44,12 @@ public class FieldsCompany extends TextField {
         TextField fullNameTextField = new TextField("Имя компании");
 
         fullNameTextField.addValueChangeListener(valueChangeEvent -> {
-            if (!(valueChangeEvent.getValue().length()>0)){
+            if (CheckCompanyEntity.isValidName(valueChangeEvent.getValue())){
+                fullNameTextField.setComponentError(null);
+            }else {
                 fullNameTextField.setComponentError(
                         new UserError("Необходимо заполнить поле "+ fullNameTextField.getCaption()));
-            }else {
-                fullNameTextField.setComponentError(null);
+
             }
         });
         fullNameTextField.setWidth(80, Unit.PERCENTAGE);
@@ -62,12 +62,11 @@ public class FieldsCompany extends TextField {
         phoneTextField = new TextField("Телефон");
         phoneTextField.setSizeFull();
         phoneTextField.addValueChangeListener(event -> {
-            if (!CheckPhone.isValidPhone(event.getValue())) {
+            if (CheckCompanyEntity.isValidPhone(event.getValue())) {
+                phoneTextField.setComponentError(null);
+            } else {
                 phoneTextField.setComponentError(
                         new UserError("Должны быть цифры"));
-            } else {
-                phoneTextField.setComponentError(null);
-
             }
         });
         return phoneTextField;
@@ -79,12 +78,11 @@ public class FieldsCompany extends TextField {
         nipTextField = new TextField("ИНН");
         nipTextField.setSizeFull();
         nipTextField.addValueChangeListener(event -> {
-            if (!CheckNIP.isValidINN(event.getValue())) {
+            if (CheckCompanyEntity.isValidINN(event.getValue())) {
+                nipTextField.setComponentError(null);
+            } else {
                 nipTextField.setComponentError(
                         new UserError("Необходим ИНН от 10 до 12 цифр"));
-            } else {
-                nipTextField.setComponentError(null);
-
             }
         });
         return nipTextField;
@@ -101,11 +99,7 @@ public class FieldsCompany extends TextField {
         } else {
             textField.setComponentError(null);
         }
-
-
     }
-
-
 }
 
 

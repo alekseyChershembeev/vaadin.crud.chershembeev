@@ -3,18 +3,18 @@ package com.vaadin8.crud.entity;
 
 import java.util.Objects;
 
-@SuppressWarnings("ALL")
 public class Company {
     private int companyId;
     private String name;
-    //  private long nip;
     private String nip;
     private String address;
-    //  private long phone;
     private String phone;
 
     public Company() {
-
+        this.name="";
+        this.nip="";
+        this.address="";
+        this.phone="";
     }
 
     public Company(int companyId, String name, String nip, String address, String phone) {

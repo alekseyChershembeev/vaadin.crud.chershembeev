@@ -6,35 +6,35 @@ import com.vaadin8.crud.entity.Employee;
 
 import java.util.List;
 
-@SuppressWarnings("ALL")
+
 public interface EmployeeDao {
     /**
-    Интеррфейс для
+    Метод для
     добавления сотрудника 
      **/
     void insertEmployee(Employee employee);
     /**
-    Интерфейс для
+    Метод для
     редактирования сотрудника
      **/
     void editEmployee(Employee employee);
     /**
-    Интерфейс для
+    Метод для
     удаления сотрудника 
      **/
     void deleteEmployee(int employeeid);
     /**
-    Интерфейс для
+    Метод для
     выбора всех сотрудников 
      **/
     List<Employee> selectAllEmployees();
     /**
-    Интерфейс для
+    Метод для
     выбора сотрудника по полю
      **/
     List<Employee> searchAllEmployees(String search);
     /**
-    Интерфейс для
+    Метод для
     добавления сотрудника
      **/
     void editEmployeeName(Company company);

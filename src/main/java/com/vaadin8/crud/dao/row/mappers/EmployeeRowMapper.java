@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class EmployeeRowMapper implements RowMapper {
 
     /**
-    Сопоставляем данные каждой строки сотрудника
+    Мапим данные каждой строки сотрудника
    **/
     /*
     Можно использовать вместо new BeanPropertyRowMapper(Employee.class);

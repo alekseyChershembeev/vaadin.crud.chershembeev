@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.util.List;
 import java.util.logging.Logger;
 
-@SuppressWarnings("ALL")
+
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private static Logger logger = Logger.getLogger(CompanyDaoImpl.class.getName());
@@ -58,8 +58,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     private static String DAO_EDIT_EMPLOYEE =
             "UPDATE employees " +
-                    "SET" +
-                    " fullname=:fullname," +
+                    "SET " +
+                    "fullname=:fullname," +
                     "birthdate=:birthdate," +
                     "email=:email," +
                     "namecompany=:namecompany " +
@@ -177,6 +177,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 
     }
+    /**
+     Метод для запроса в БД по точному поиску слова у сторудников
+     **/
 
     private static String dao_search_all_employees(String search) {
         String filterLike = "" + "'%" + search + "%' ";

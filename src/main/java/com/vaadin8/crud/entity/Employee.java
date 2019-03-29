@@ -2,7 +2,7 @@ package com.vaadin8.crud.entity;
 
 import java.util.Objects;
 
-@SuppressWarnings("ALL")
+
 public class Employee {
     private int employeeId;
     private String fullName;
@@ -12,7 +12,10 @@ public class Employee {
     private String nameCompany;
 
     public Employee() {
-
+        this.fullName="";
+        this.birthDate="";
+        this.email="";
+        this.nameCompany="";
     }
 
 

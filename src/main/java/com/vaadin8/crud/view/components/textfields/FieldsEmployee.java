@@ -1,11 +1,12 @@
 package com.vaadin8.crud.view.components.textfields;
 
 
-import com.AisaTest06.check.fields.CheckMail;
+
 import com.vaadin.server.UserError;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.TextField;
+import com.vaadin8.crud.check.fields.CheckEmployeeEntity;
 
 import java.util.logging.Logger;
 
@@ -24,11 +25,11 @@ public class FieldsEmployee extends TextField {
         TextField fullName = new TextField("ФИО");
 
         fullName.addValueChangeListener(valueChangeEvent -> {
-            if (!(valueChangeEvent.getValue().length()>0)){
-                fullName.setComponentError(new UserError("Необходимо ввести имя"));
+            if (CheckEmployeeEntity.isValidName(valueChangeEvent.getValue())){
+                fullName.setComponentError(null);
             }
             else {
-                fullName.setComponentError(null);
+                fullName.setComponentError(new UserError("Необходимо ввести имя"));
             }
         });
         fullName.setSizeFull();
@@ -42,11 +43,11 @@ public class FieldsEmployee extends TextField {
         DateField dateField = new DateField("Дата рождения");
 
         dateField.addValueChangeListener(valueChangeEvent -> {
-            if (dateField.isEmpty()){
-                dateField.setComponentError(new UserError("Необходимо ввести дату"));
+            if (CheckEmployeeEntity.isValidDate(valueChangeEvent.getValue().toString())){
+                dateField.setComponentError(null);
             }
             else {
-                dateField.setComponentError(null);
+                dateField.setComponentError(new UserError("Необходимо ввести дату"));
             }
         });
         dateField.setSizeFull();
@@ -65,17 +66,13 @@ public class FieldsEmployee extends TextField {
 
 
 
-            if (!CheckMail.isValidPhone(event.getValue())) {
-                emailTextField.setComponentError(new UserError("Нужен email"));
-            }
-            else if (!(event.getValue().length()>0)){
-                emailTextField.setComponentError(new UserError("Необходимо заполнить email"));
+            if (CheckEmployeeEntity.isValidMail(event.getValue())) {
+
+                emailTextField.setComponentError(null);
             }
             else{
-                emailTextField.setComponentError(null);
-
+                emailTextField.setComponentError(new UserError("Необходимо заполнить email"));
             }
-
 
         });
         return emailTextField;
@@ -87,7 +84,8 @@ public class FieldsEmployee extends TextField {
     public void check(TextField textField) {
 
         if (textField.getValue().isEmpty()) {
-            textField.setComponentError(new UserError("Необходимо заполнить поле "+ textField.getCaption()));
+            textField.setComponentError(new UserError(
+                    "Необходимо заполнить поле "+ textField.getCaption()));
             logger.warning("Необхадимо заполнить поле "+ textField.getCaption());
         }
         else {
@@ -100,8 +98,9 @@ public class FieldsEmployee extends TextField {
     */
     public void check(DateField dateField) {
         if (dateField.isEmpty()) {
-            dateField.setComponentError(new UserError("Необходимо заполнить поле "+dateField.getCaption() ));
-            logger.warning("Необхадимо заполнить дату ");
+            dateField.setComponentError(new UserError(
+                    "Необхадим формат yyyy-MM-dd "+dateField.getCaption() ));
+            logger.warning("Необхадим формат yyyy-MM-dd");
         }
         else {
             dateField.setComponentError(null);
@@ -112,7 +111,8 @@ public class FieldsEmployee extends TextField {
     */
     public void check(ComboBox comboBox) {
         if (comboBox.isEmpty()) {
-            comboBox.setComponentError(new UserError("Необходимо "+ comboBox.getCaption()));
+            comboBox.setComponentError(new UserError(
+                    "Необходимо "+ comboBox.getCaption()));
             logger.warning("Необходимо "+ comboBox.getCaption());
         }
         else {

@@ -17,8 +17,6 @@ public class DataSourceConfiguration {
 
     private static BasicDataSource dataSource;
 
-
-
     private static Logger logger = Logger.getLogger(DataSourceConfiguration.class.getName());
 
     private static BasicDataSource dataSource() {
@@ -33,7 +31,7 @@ public class DataSourceConfiguration {
         return dataSource;
     }
     /**
-    соеденинение с БД всегда в 1 экземпляре
+    Соеденинение с БД всегда в 1 экземпляре
     **/
     public static synchronized BasicDataSource getInstance() {
         if (dataSource == null) {

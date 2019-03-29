@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.util.List;
 import java.util.logging.Logger;
 
-@SuppressWarnings("ALL")
+
 public class CompanyDaoImpl implements CompanyDao {
 
     private static Logger logger = Logger.getLogger(CompanyDaoImpl.class.getName());
@@ -24,9 +24,7 @@ public class CompanyDaoImpl implements CompanyDao {
     }
 
     private static final String DAO_INSERT_COMPANY =
-            "INSERT INTO COMPANIES " +
-                    "(name,nip,address,phone)" +
-                    "VALUES(:name,:nip,:address,:phone) ";
+            "INSERT INTO COMPANIES (name,nip,address,phone)VALUES(:name,:nip,:address,:phone) ";
 
     @Override
     public void insertCompany(Company company) {
@@ -94,20 +92,17 @@ public class CompanyDaoImpl implements CompanyDao {
     public void deleteCompany(int companyid) {
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        int result;
+
         if (companyid!=0) {
 
             try {
                 parameters.addValue("companyid", companyid);
-
-                result = jdbcTemplate.update(DAO_DELETE_COMPANY, parameters);
+                jdbcTemplate.update(DAO_DELETE_COMPANY, parameters);
 
                 logger.info("Успешно удалена компания " + companyid);
-
-
             } catch (DataAccessException d) {
-                logger.warning("Ошибка при удалении компании " + d);
 
+                logger.warning("Ошибка при удалении компании " + d);
             }
         }
     }
@@ -124,7 +119,6 @@ public class CompanyDaoImpl implements CompanyDao {
             listCompanies = jdbcTemplate.query(DAO_SELECT_ALL_COMPANIES, new CompanyRowMapper());
 
             logger.info("Успешно добавлены все компании ");
-
             return listCompanies;
 
 
@@ -142,7 +136,7 @@ public class CompanyDaoImpl implements CompanyDao {
     }
 
     /**
-    Метод для запроса в БД по точному поиску слова в компании
+    Метод для запроса в БД по точному поиску слова в компаниях
     **/
     private static String dao_search_all_companies(String search) {
         String filterLike = "" + "'%" + search + "%' ";
@@ -160,7 +154,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
     @Override
     public List<Company> searchAllCompanies(String search) {
-        List<Company> listCompanies;
+        List listCompanies;
 
         try {
             if (!search.equals("")) {
