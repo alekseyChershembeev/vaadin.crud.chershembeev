@@ -72,7 +72,7 @@ public class MainLayout extends VerticalLayout {
                         addComponent(employeeGrid);
                         removeComponent(companyGrid);
 
-                        logger.info("Выбран tabCompany " + tabEmployee.getStyleName());
+                        logger.info("Выбран tabEmployee " + tabEmployee.getStyleName());
                     }
                 });
 
